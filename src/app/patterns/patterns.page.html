@@ -1,34 +1,24 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Patterns</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Patterns</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-list>
-  <ion-button (click)="wave()">
-    <ion-label>Wave</ion-label>
-  </ion-button>
-  <ion-button (click)="rainbowCycle()">
-    <ion-label>Rainbow Cycle</ion-label>
-  </ion-button>
-  <ion-button (click)="colorRider()">
-    <ion-label>Color Rider</ion-label>
-  </ion-button>
-  <ion-button (click)="strobe()">
-    <ion-label>Strobe</ion-label>
-  </ion-button>
-  <ion-button (click)="runningLight()">
-    <ion-label>Running Light</ion-label>
-  </ion-button>
-  <ion-button (click)="rainbowChase()">
-    <ion-label>Rainbow Chase</ion-label>
-  </ion-button>
-  <ion-button (click)="rainbowSparkle()">
-    <ion-label>Rainbow Sparkle</ion-label>
-  </ion-button>
-  <ion-button (click)="stop()">
-    <ion-label>Stop</ion-label>
-  </ion-button>
-</ion-list>
+    <ion-list>
+        <ion-item *ngFor="let pattern of patterns" (click)="toggle(pattern)">
+            <ion-button fill="clear" class="toggle">
+                <ion-label>{{pattern.text}}</ion-label>
+            </ion-button>
+            <ion-icon icon="settings" slot="end" color="primary" (click)="options(pattern)"></ion-icon>
+        </ion-item>
+        <ion-item (click)="stop()">
+            <ion-button fill="clear">
+                <ion-label>Stop</ion-label>
+            </ion-button>
+        </ion-item>
+    </ion-list>
 </ion-content>
