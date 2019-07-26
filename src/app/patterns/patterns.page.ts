@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PatternsPage implements OnInit {
 
-  BASE = '/';
+  BASE = 'wyssddns.internet-box.ch:3000/';
 
   constructor(private http: HttpClient) { }
 
