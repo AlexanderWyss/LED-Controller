@@ -8,6 +8,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { path: 'patterns', loadChildren: './patterns/patterns.module#PatternsPageModule' },
+  { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
 ];
 
 @NgModule({

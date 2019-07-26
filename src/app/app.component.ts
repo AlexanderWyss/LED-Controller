@@ -14,6 +14,10 @@ export class AppComponent {
       title: 'Patterns',
       url: '/patterns',
       icon: 'color-palette'
+    }, {
+      title: 'Settings',
+      url: '/settings',
+      icon: 'color-palette'
     }
   ];
 

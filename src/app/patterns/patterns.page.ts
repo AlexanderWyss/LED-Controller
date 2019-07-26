@@ -40,6 +40,10 @@ export class PatternsPage implements OnInit {
   }
 
   rainbowSparkle() {
-    this.http.get(this.BASE + 'sparkle').subscribe()
+    this.http.get(this.BASE + 'sparkle').subscribe();
+  }
+
+  stop() {
+    this.http.get(this.BASE + 'stop').subscribe();
   }
 }
