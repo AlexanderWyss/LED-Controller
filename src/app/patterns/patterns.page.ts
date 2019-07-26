@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import * as socketIo from 'socket.io-client';
-import {Router} from "@angular/router";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 
 export interface Pattern {
@@ -16,8 +15,7 @@ export interface Pattern {
 })
 export class PatternsPage implements OnInit {
 
-    BASE = '/';
-    private socket: any;
+    BASE = '/api/start';
     patterns: Pattern[] = [
         {
             name: 'wave',
@@ -44,14 +42,15 @@ export class PatternsPage implements OnInit {
     ];
 
     constructor(private http: HttpClient, private router: Router) {
-        this.socket = socketIo('http://localhost:3001');
     }
 
     ngOnInit() {
     }
 
     toggle(pattern: Pattern) {
-        this.http.get(this.BASE + pattern.name).subscribe();
+        const param = new HttpParams()
+            .set('pattern', pattern.name);
+        this.http.get(this.BASE, {params: param}).subscribe();
     }
 
     options(pattern: Pattern) {
