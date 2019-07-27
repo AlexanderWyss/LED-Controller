@@ -8,20 +8,32 @@ ion-list {
     flex: 1 1 auto;
     display: flex;
 
-    ion-icon {
-      height: 100%;
+    .item-inner {
+      margin-right: 0;
+    }
+
+    ion-button.settings {
+      width: 30%;
+      background-color: whitesmoke;
+      ion-icon {
+        text-align: center;
+        font-size: 2rem;
+      }
     }
 
     ion-button {
       height: 100%;
       width: 100%;
-
       ion-label {
+        width: 100%;
         font-size: 1.3rem;
         color: black;
-        width: 100%;
         text-align: start;
       }
+    }
+
+    ion-button.toggle {
+      width: 70%;
     }
   }
 }

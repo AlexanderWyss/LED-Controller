@@ -13,9 +13,11 @@
             <ion-button fill="clear" class="toggle" (click)="toggle(pattern)">
                 <ion-label>{{pattern.text}}</ion-label>
             </ion-button>
-            <ion-icon icon="settings" slot="end" color="primary" (click)="options(pattern)"></ion-icon>
+            <ion-button fill="clear" class="settings" (click)="options(pattern)">
+                <ion-icon icon="settings" slot="end" color="primary"></ion-icon>
+            </ion-button>
         </ion-item>
-        <ion-item >
+        <ion-item>
             <ion-button fill="clear" (click)="stop()">
                 <ion-label>Stop</ion-label>
             </ion-button>
