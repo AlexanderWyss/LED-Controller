@@ -12,6 +12,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {PatternSettingsSliderComponent} from './pattern-settings-slider/pattern-settings-slider.component';
 import {FormsModule} from '@angular/forms';
 import {PatternSettingsModule} from './pattern-settings/pattern-settings.module';
+import {ColorPickerModule} from 'ngx-color-picker';
 
 @NgModule({
     declarations: [AppComponent],
@@ -22,7 +23,8 @@ import {PatternSettingsModule} from './pattern-settings/pattern-settings.module'
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        PatternSettingsModule
+        PatternSettingsModule,
+        ColorPickerModule
     ],
     providers: [
         StatusBar,

@@ -36,6 +36,11 @@ export class PatternService {
                 name: 'returnValue',
                 value: 40,
                 type: 'slider'
+            }, {
+                title: 'Color',
+                name: 'color',
+                value: '#ffffff',
+                type: 'color'
             }]
         }, {
             name: 'rainbow',
@@ -78,6 +83,11 @@ export class PatternService {
               name: 'endDelay',
               value: 1000,
               type: 'slider'
+            }, {
+                title: 'Color',
+                name: 'color',
+                value: '#ffffff',
+                type: 'color'
             }]
         }, {
             name: 'running',
@@ -87,6 +97,11 @@ export class PatternService {
               name: 'speed',
               value: 100,
               type: 'slider'
+            }, {
+                title: 'Color',
+                name: 'color',
+                value: '#ffffff',
+                type: 'color'
             }]
         }, {
             name: 'chase',

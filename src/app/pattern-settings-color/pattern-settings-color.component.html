@@ -1,0 +1,4 @@
+<ion-item (click)="log()">
+  <ion-label>{{patternSetting.title}}</ion-label>
+  <input [(colorPicker)]="patternSetting.value" [style.background]="patternSetting.value"/>
+</ion-item>

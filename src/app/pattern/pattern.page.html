@@ -11,6 +11,7 @@
   <ion-list>
     <div *ngFor="let patternSetting of pattern.patternSettings">
       <app-pattern-settings-slider *ngIf="patternSetting.type =='slider'" [patternSetting]="patternSetting"></app-pattern-settings-slider>
+      <app-pattern-settings-color *ngIf="patternSetting.type =='color'" [patternSetting]="patternSetting"></app-pattern-settings-color>
     </div>
   </ion-list>
   <ion-fab vertical="end" horizontal="start" class="horizontal-ion-fab-list">
