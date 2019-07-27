@@ -20,6 +20,7 @@ export class PatternsPage implements OnInit {
     }
 
     toggle(pattern: Pattern) {
+        this.ledService.save(pattern);
         this.ledService.start(pattern.name);
     }
 
