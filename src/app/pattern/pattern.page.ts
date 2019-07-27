@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Pattern, PatternService} from '../pattern.service';
 import {ActivatedRoute} from '@angular/router';
+import {LEDService} from '../led.service';
 
 @Component({
     selector: 'app-wave',
@@ -10,10 +11,9 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class PatternPage implements OnInit {
 
-    BASE = '/api/options';
     pattern: Pattern;
 
-    constructor(private http: HttpClient, private patternService: PatternService, private route: ActivatedRoute) {
+    constructor(private patternService: PatternService, private route: ActivatedRoute, private ledService: LEDService) {
         this.route.params.subscribe(params =>
             this.pattern = this.patternService.patterns
                 .filter(pattern => pattern.name.toLowerCase() === params.name.toLowerCase())[0]
@@ -24,12 +24,15 @@ export class PatternPage implements OnInit {
     }
 
     save() {
-        let param = new HttpParams()
-            .set('pattern', this.pattern.name);
-        for (const patternSetting of this.pattern.patternSettings) {
-            console.log(patternSetting.value.toString());
-            param = param.set(patternSetting.name, patternSetting.value.toString());
-        }
-        this.http.get(this.BASE, {params: param}).subscribe();
+        this.ledService.save(this.pattern);
+    }
+
+    start() {
+        this.ledService.save(this.pattern);
+        this.ledService.start(this.pattern.name);
+    }
+
+    stop() {
+        this.ledService.stop();
     }
 }

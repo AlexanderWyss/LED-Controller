@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {PatternService, Pattern} from '../pattern.service';
+import {LEDService} from '../led.service';
 
 @Component({
     selector: 'app-patterns',
@@ -10,10 +10,9 @@ import {PatternService, Pattern} from '../pattern.service';
 })
 export class PatternsPage implements OnInit {
 
-    BASE = '/api/';
     patterns: Pattern[];
 
-    constructor(private http: HttpClient, private router: Router, private patternService: PatternService) {
+    constructor(private router: Router, private patternService: PatternService, private ledService: LEDService) {
         this.patterns = this.patternService.patterns;
     }
 
@@ -21,9 +20,7 @@ export class PatternsPage implements OnInit {
     }
 
     toggle(pattern: Pattern) {
-        const param = new HttpParams()
-            .set('pattern', pattern.name);
-        this.http.get(this.BASE + 'start', {params: param}).subscribe();
+        this.ledService.start(pattern.name);
     }
 
     options(pattern: Pattern) {
@@ -31,10 +28,10 @@ export class PatternsPage implements OnInit {
     }
 
     stop() {
-        this.http.get(this.BASE + 'stop').subscribe();
+        this.ledService.stop();
     }
 
     allOff() {
-        this.http.get(this.BASE + 'alloff').subscribe();
+        this.ledService.allOff();
     }
 }

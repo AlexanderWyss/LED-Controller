@@ -1,5 +1,17 @@
-ion-item {
-  & > * {
-    width: 100%;
+ion-list {
+  height: 100%;
+  ion-item {
+    & > * {
+      width: 100%;
+    }
   }
+}
+
+ion-fab-button {
+  padding: 0.2rem;
+}
+
+.horizontal-ion-fab-list {
+  display: flex;
+  flex-direction: row;
 }
