@@ -14,4 +14,7 @@ export class PatternSettingsSliderComponent implements OnInit {
 
   ngOnInit() {}
 
+  checkValue($event: any) {
+    this.patternSetting.value = Math.min(1000, Math.max(0, this.patternSetting.value));
+  }
 }
