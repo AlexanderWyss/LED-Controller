@@ -1,29 +1,20 @@
 ion-list {
   height: 100%;
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
 
   ion-item {
     flex: 1 1 auto;
     display: flex;
-
-    .item-inner {
-      margin-right: 0;
-    }
-
-    ion-button.settings {
-      width: 30%;
-      background-color: whitesmoke;
-      ion-icon {
-        text-align: center;
-        font-size: 2rem;
-      }
-    }
+    --inner-padding-end: 0;
 
     ion-button {
       height: 100%;
-      width: 100%;
+      width: 50%;
+      margin: 0;
+
       ion-label {
         width: 100%;
         font-size: 1.3rem;
@@ -32,8 +23,17 @@ ion-list {
       }
     }
 
+    ion-button.settings {
+      width: 25%;
+      background-color: whitesmoke;
+      ion-icon {
+        text-align: center;
+        font-size: 2rem;
+      }
+    }
+
     ion-button.toggle {
-      width: 70%;
+      width: 75%;
     }
   }
 }
