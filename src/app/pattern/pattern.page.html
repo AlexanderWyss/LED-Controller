@@ -13,7 +13,7 @@
       <app-pattern-settings-slider *ngIf="patternSetting.type =='slider'" [patternSetting]="patternSetting"></app-pattern-settings-slider>
     </div>
   </ion-list>
-  <ion-fab vertical="bottom" horizontal="start" class="horizontal-ion-fab-list">
+  <ion-fab vertical="end" horizontal="start" class="horizontal-ion-fab-list">
     <ion-fab-button (click)="stop()" color="danger">
       <ion-icon icon="square"></ion-icon>
     </ion-fab-button>
@@ -21,7 +21,7 @@
       <ion-icon icon="play"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-fab vertical="bottom" horizontal="end">
+  <ion-fab vertical="end" horizontal="end">
     <ion-fab-button (click)="save()">
       <ion-icon icon="save"></ion-icon>
     </ion-fab-button>

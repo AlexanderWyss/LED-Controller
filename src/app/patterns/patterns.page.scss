@@ -8,6 +8,10 @@ ion-list {
     flex: 1 1 auto;
     display: flex;
 
+    ion-icon {
+      height: 100%;
+    }
+
     ion-button {
       height: 100%;
       width: 100%;
