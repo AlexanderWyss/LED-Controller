@@ -15,7 +15,7 @@ export interface Pattern {
 })
 export class PatternsPage implements OnInit {
 
-    BASE = '/api/start';
+    BASE = '/api/';
     patterns: Pattern[] = [
         {
             name: 'wave',
@@ -50,7 +50,7 @@ export class PatternsPage implements OnInit {
     toggle(pattern: Pattern) {
         const param = new HttpParams()
             .set('pattern', pattern.name);
-        this.http.get(this.BASE, {params: param}).subscribe();
+        this.http.get(this.BASE + 'start', {params: param}).subscribe();
     }
 
     options(pattern: Pattern) {
@@ -59,5 +59,8 @@ export class PatternsPage implements OnInit {
 
     stop() {
         this.http.get(this.BASE + 'stop').subscribe();
+    }
+    allOff() {
+        this.http.get(this.BASE + 'alloff').subscribe();
     }
 }

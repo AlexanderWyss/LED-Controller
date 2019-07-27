@@ -15,9 +15,12 @@
             </ion-button>
             <ion-icon icon="settings" slot="end" color="primary" (click)="options(pattern)"></ion-icon>
         </ion-item>
-        <ion-item (click)="stop()">
-            <ion-button fill="clear">
+        <ion-item >
+            <ion-button fill="clear" (click)="stop()">
                 <ion-label>Stop</ion-label>
+            </ion-button>
+            <ion-button fill="clear" (click)="allOff()">
+                <ion-label>All Off</ion-label>
             </ion-button>
         </ion-item>
     </ion-list>
