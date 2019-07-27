@@ -33,7 +33,7 @@ export class PatternService {
                 type: 'slider'
             }, {
                 title: 'Return',
-                name: 'return',
+                name: 'returnValue',
                 value: 40,
                 type: 'slider'
             }]
