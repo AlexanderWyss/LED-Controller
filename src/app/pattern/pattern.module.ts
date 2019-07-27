@@ -5,12 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { WavePage } from './wave.page';
+import { PatternPage } from './pattern.page';
+import {PatternSettingsModule} from '../pattern-settings/pattern-settings.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: WavePage
+    component: PatternPage
   }
 ];
 
@@ -19,8 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    PatternSettingsModule
   ],
-  declarations: [WavePage]
+  declarations: [PatternPage]
 })
-export class WavePageModule {}
+export class PatternPageModule {}

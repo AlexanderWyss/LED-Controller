@@ -1,12 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
-
-
-export interface Pattern {
-    name: string;
-    text: string;
-}
+import {PatternService, Pattern} from '../pattern.service';
 
 @Component({
     selector: 'app-patterns',
@@ -16,32 +11,10 @@ export interface Pattern {
 export class PatternsPage implements OnInit {
 
     BASE = '/api/';
-    patterns: Pattern[] = [
-        {
-            name: 'wave',
-            text: 'Wave'
-        }, {
-            name: 'rainbow',
-            text: 'Rainbow Cycle'
-        }, {
-            name: 'rider',
-            text: 'Color Rider'
-        }, {
-            name: 'strobe',
-            text: 'Strobe'
-        }, {
-            name: 'running',
-            text: 'Running Light'
-        }, {
-            name: 'chase',
-            text: 'Rainbow Chase'
-        }, {
-            name: 'sparkle',
-            text: 'Rainbow Sparkle'
-        }
-    ];
+    patterns: Pattern[];
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient, private router: Router, private patternService: PatternService) {
+        this.patterns = this.patternService.patterns;
     }
 
     ngOnInit() {
@@ -54,12 +27,13 @@ export class PatternsPage implements OnInit {
     }
 
     options(pattern: Pattern) {
-        this.router.navigate(['/' + pattern.name]);
+        this.router.navigate(['/pattern/' + pattern.name]);
     }
 
     stop() {
         this.http.get(this.BASE + 'stop').subscribe();
     }
+
     allOff() {
         this.http.get(this.BASE + 'alloff').subscribe();
     }

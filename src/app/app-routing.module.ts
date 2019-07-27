@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   { path: 'patterns', loadChildren: './patterns/patterns.module#PatternsPageModule' },
   { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
-  { path: 'wave', loadChildren: './wave/wave.module#WavePageModule' },
+  { path: 'pattern/:name', loadChildren: './pattern/pattern.module#PatternPageModule' },
 ];
 
 @NgModule({

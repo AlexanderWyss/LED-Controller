@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{pattern.text}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <div *ngFor="let patternSetting of pattern.patternSettings">
+      <app-pattern-settings-slider *ngIf="patternSetting.type =='slider'" [patternSetting]="patternSetting"></app-pattern-settings-slider>
+    </div>
+  </ion-list>
+  <ion-fab vertical="end" horizontal="end">
+    <ion-fab-button (click)="save()">
+      <ion-icon icon="save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
