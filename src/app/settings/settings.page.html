@@ -8,5 +8,13 @@
 </ion-header>
 
 <ion-content>
-
+<ion-list>
+  <ion-item>
+    <ion-label>Com Ports</ion-label>
+    <ion-select [(ngModel)]="selectedPort" value="autoselect" (ionChange)="setPort()">
+      <ion-select-option value="autoselect">Autoselect</ion-select-option>
+      <ion-select-option *ngFor="let port of serialports" [value]="port.comName">{{port.comName}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
 </ion-content>
