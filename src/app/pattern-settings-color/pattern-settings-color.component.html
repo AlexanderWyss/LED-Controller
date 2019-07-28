@@ -1,4 +1,4 @@
-<ion-item (click)="log()">
+<ion-item>
   <ion-label>{{patternSetting.title}}</ion-label>
-  <input [(colorPicker)]="patternSetting.value" [style.background]="patternSetting.value"/>
+  <chrome-picker [(color)]="patternSetting.value" [control]="control"></chrome-picker>
 </ion-item>

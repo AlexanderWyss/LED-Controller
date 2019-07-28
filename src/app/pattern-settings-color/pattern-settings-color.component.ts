@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PatternSetting} from '../pattern.service';
+import {ColorPickerControl} from '@iplab/ngx-color-picker';
 
 @Component({
   selector: 'app-pattern-settings-color',
@@ -9,11 +10,10 @@ import {PatternSetting} from '../pattern.service';
 export class PatternSettingsColorComponent implements OnInit {
 
   @Input() patternSetting: PatternSetting;
+  control = new ColorPickerControl()
+                        .hideAlphaChannel();
 
   constructor() { }
 
   ngOnInit() {}
-
-  log() {
-  }
 }

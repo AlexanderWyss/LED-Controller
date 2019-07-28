@@ -12,7 +12,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {PatternSettingsSliderComponent} from './pattern-settings-slider/pattern-settings-slider.component';
 import {FormsModule} from '@angular/forms';
 import {PatternSettingsModule} from './pattern-settings/pattern-settings.module';
-import {ColorPickerModule} from 'ngx-color-picker';
+import { ColorPickerModule } from '@iplab/ngx-color-picker';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [AppComponent],
@@ -24,7 +25,8 @@ import {ColorPickerModule} from 'ngx-color-picker';
         HttpClientModule,
         FormsModule,
         PatternSettingsModule,
-        ColorPickerModule
+        ColorPickerModule,
+        NoopAnimationsModule
     ],
     providers: [
         StatusBar,
