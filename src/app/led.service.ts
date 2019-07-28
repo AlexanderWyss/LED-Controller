@@ -20,6 +20,7 @@ export class LEDService {
 
     private selectedPort: string;
     private numberOfLeds = 13;
+    private pin = '2';
 
     BASE = '/api/';
 
@@ -59,6 +60,17 @@ export class LEDService {
 
     public getNumberOfLeds(): number {
         return this.numberOfLeds;
+    }
+
+    public setPin(pin: string) {
+        this.pin = pin;
+        const param = new HttpParams()
+            .set('pin', pin);
+        this.http.get(this.BASE + 'options/pin/set', {params: param}).subscribe();
+    }
+
+    public getPin(): string {
+        return this.pin;
     }
 
     public getSerialports(): Promise<SerialPort[]> {
