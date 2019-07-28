@@ -10,11 +10,17 @@ export class SettingsPage implements OnInit {
 
     private serialports: SerialPort[];
     private selectedPort;
+    private numberOfLeds: number;
 
     constructor(private ledService: LEDService) {
     }
 
     ngOnInit() {
+        this.initPort();
+        this.numberOfLeds = this.ledService.getNumberOfLeds();
+    }
+
+    private initPort() {
         this.ledService.getSerialports().then(serialports => this.serialports = serialports);
         if (this.ledService.getSelectedPort()) {
             this.selectedPort = this.ledService.getSelectedPort();
@@ -25,5 +31,9 @@ export class SettingsPage implements OnInit {
 
     setPort() {
         this.ledService.setSerialport(this.selectedPort);
+    }
+
+    setNumberOfLeds() {
+      this.ledService.setNumberOfLeds(this.numberOfLeds);
     }
 }

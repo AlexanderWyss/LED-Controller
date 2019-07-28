@@ -19,6 +19,7 @@ export interface SerialPort {
 export class LEDService {
 
     private selectedPort: string;
+    private numberOfLeds = 13;
 
     BASE = '/api/';
 
@@ -47,6 +48,17 @@ export class LEDService {
             param = param.set(patternSetting.name, patternSetting.value.toString());
         }
         this.http.get(this.BASE + 'options', {params: param}).subscribe();
+    }
+
+    public setNumberOfLeds(leds: number) {
+        this.numberOfLeds = leds;
+        const param = new HttpParams()
+            .set('leds', leds.toString());
+        this.http.get(this.BASE + 'options/leds/set', {params: param}).subscribe();
+    }
+
+    public getNumberOfLeds(): number {
+        return this.numberOfLeds;
     }
 
     public getSerialports(): Promise<SerialPort[]> {

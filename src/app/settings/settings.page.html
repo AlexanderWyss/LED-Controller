@@ -16,5 +16,9 @@
       <ion-select-option *ngFor="let port of serialports" [value]="port.comName">{{port.comName}}</ion-select-option>
     </ion-select>
   </ion-item>
+  <ion-item>
+    <ion-label>Number of LEDs</ion-label>
+    <ion-input [(ngModel)]="numberOfLeds" (change)="setNumberOfLeds()" type="number"></ion-input>
+  </ion-item>
 </ion-list>
 </ion-content>
