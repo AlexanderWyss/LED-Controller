@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpParams} from '@angular/common/http';
 import {Pattern} from './pattern.service';
-import {map} from 'rxjs/operators';
+import {ComService} from './com.service';
 
 export interface SerialPort {
     comName: string;
@@ -24,21 +24,21 @@ export class LEDService {
 
     BASE = '/api/';
 
-    constructor(private http: HttpClient) {
+    constructor(private com: ComService) {
     }
 
     public start(name: string) {
         const param = new HttpParams()
             .set('pattern', name);
-        this.http.get(this.BASE + 'start', {params: param}).subscribe();
+        this.com.get(this.BASE + 'start', param);
     }
 
     public stop() {
-        this.http.get(this.BASE + 'stop').subscribe();
+        this.com.get(this.BASE + 'stop');
     }
 
     public allOff() {
-        this.http.get(this.BASE + 'alloff').subscribe();
+        this.com.get(this.BASE + 'alloff');
     }
 
     public save(pattern: Pattern) {
@@ -48,14 +48,14 @@ export class LEDService {
             console.log(patternSetting.value.toString());
             param = param.set(patternSetting.name, patternSetting.value.toString());
         }
-        this.http.get(this.BASE + 'options', {params: param}).subscribe();
+        this.com.get(this.BASE + 'options', param);
     }
 
     public setNumberOfLeds(leds: number) {
         this.numberOfLeds = leds;
         const param = new HttpParams()
             .set('leds', leds.toString());
-        this.http.get(this.BASE + 'options/leds/set', {params: param}).subscribe();
+        this.com.get(this.BASE + 'options/leds/set', param);
     }
 
     public getNumberOfLeds(): number {
@@ -66,7 +66,7 @@ export class LEDService {
         this.pin = pin;
         const param = new HttpParams()
             .set('pin', pin);
-        this.http.get(this.BASE + 'options/pin/set', {params: param}).subscribe();
+        this.com.get(this.BASE + 'options/pin/set', param);
     }
 
     public getPin(): string {
@@ -74,14 +74,14 @@ export class LEDService {
     }
 
     public getSerialports(): Promise<SerialPort[]> {
-        return this.http.get(this.BASE + 'serialport/get').pipe(map((result: any) => result.serialports)).toPromise();
+        return this.com.get(this.BASE + 'serialport/get').then((result: any) => result.serialports);
     }
 
     public setSerialport(name: string) {
         this.selectedPort = name;
         const param = new HttpParams()
             .set('name', name);
-        this.http.get(this.BASE + 'serialport/set', {params: param}).subscribe();
+        this.com.get(this.BASE + 'serialport/set', param);
     }
 
     public getSelectedPort() {
