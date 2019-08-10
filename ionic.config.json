@@ -1,5 +1,7 @@
 {
   "name": "LED-Controller",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
