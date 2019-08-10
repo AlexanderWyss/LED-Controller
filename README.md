@@ -6,8 +6,8 @@ npm i -g cordova
 ```
 
 Java 1.8.* + JAVA_HOME env variable
-Android sdk + ANDROID_SKD_ROOT env variable (Am einfachsten installiert mithilfe von AndroidStuio)
-adb installiert
+
+Android sdk + ANDROID_SKD_ROOT env variable + adb (Am einfachsten installiert mithilfe von AndroidStuio)
 
 Install on device:
 ```
