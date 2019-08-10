@@ -8,10 +8,10 @@ import {LEDService, SerialPort} from '../led.service';
 })
 export class SettingsPage implements OnInit {
 
-    private serialports: SerialPort[];
-    private selectedPort;
-    private numberOfLeds: number;
-    private pin: string;
+    serialports: SerialPort[];
+    selectedPort;
+    numberOfLeds: number;
+    pin: string;
     pins = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'];
 
     constructor(private ledService: LEDService) {
