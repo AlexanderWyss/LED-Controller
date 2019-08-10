@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpParams} from '@angular/common/http';
 import {Pattern} from './pattern.service';
 import {ComService} from './com.service';
+import {HttpComService} from './http-com.service';
+import {BleComService} from './ble-com.service';
+import {Platform} from '@ionic/angular';
 
 export interface SerialPort {
     comName: string;
@@ -24,38 +27,40 @@ export class LEDService {
 
     BASE = '/api/';
 
-    constructor(private com: ComService) {
+    private com: ComService;
+
+    constructor(private httpCom: HttpComService, private bleCom: BleComService, private plt: Platform) {
+        if (plt.is('cordova')) {
+            this.com = bleCom;
+        } else {
+            this.com = httpCom;
+        }
     }
 
     public start(name: string) {
-        const param = new HttpParams()
-            .set('pattern', name);
-        this.com.get(this.BASE + 'start', param);
+        this.com.write(this.BASE + 'start', {pattern: name});
     }
 
     public stop() {
-        this.com.get(this.BASE + 'stop');
+        this.com.read(this.BASE + 'stop');
     }
 
     public allOff() {
-        this.com.get(this.BASE + 'alloff');
+        this.com.read(this.BASE + 'alloff');
     }
 
     public save(pattern: Pattern) {
-        let param = new HttpParams()
-            .set('pattern', pattern.name);
+        const data = {pattern: pattern.name};
         for (const patternSetting of pattern.patternSettings) {
             console.log(patternSetting.value.toString());
-            param = param.set(patternSetting.name, patternSetting.value.toString());
+            data[patternSetting.name] = patternSetting.value.toString();
         }
-        this.com.get(this.BASE + 'options', param);
+        this.com.write(this.BASE + 'options', data);
     }
 
     public setNumberOfLeds(leds: number) {
         this.numberOfLeds = leds;
-        const param = new HttpParams()
-            .set('leds', leds.toString());
-        this.com.get(this.BASE + 'options/leds/set', param);
+        this.com.write(this.BASE + 'options/leds/set', {leds: leds.toString()});
     }
 
     public getNumberOfLeds(): number {
@@ -64,9 +69,7 @@ export class LEDService {
 
     public setPin(pin: string) {
         this.pin = pin;
-        const param = new HttpParams()
-            .set('pin', pin);
-        this.com.get(this.BASE + 'options/pin/set', param);
+        this.com.write(this.BASE + 'options/pin/set', {pin});
     }
 
     public getPin(): string {
@@ -74,14 +77,12 @@ export class LEDService {
     }
 
     public getSerialports(): Promise<SerialPort[]> {
-        return this.com.get(this.BASE + 'serialport/get').then((result: any) => result.serialports);
+        return this.com.read(this.BASE + 'serialport/write').then((result: any) => result.serialports);
     }
 
-    public setSerialport(name: string) {
-        this.selectedPort = name;
-        const param = new HttpParams()
-            .set('name', name);
-        this.com.get(this.BASE + 'serialport/set', param);
+    public setSerialport(port: string) {
+        this.selectedPort = port;
+        this.com.write(this.BASE + 'serialport/set', {name: port});
     }
 
     public getSelectedPort() {
