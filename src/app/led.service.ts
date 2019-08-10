@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {HttpParams} from '@angular/common/http';
 import {Pattern} from './pattern.service';
 import {ComService} from './com.service';
 import {HttpComService} from './http-com.service';
@@ -30,11 +29,15 @@ export class LEDService {
     private com: ComService;
 
     constructor(private httpCom: HttpComService, private bleCom: BleComService, private plt: Platform) {
-        if (plt.is('cordova')) {
-            this.com = bleCom;
-        } else {
-            this.com = httpCom;
-        }
+        this.plt.ready().then((readySource) => {
+            if (plt.is('cordova')) {
+                console.log('BLE');
+                this.com = bleCom;
+            } else {
+                console.log('HTTP');
+                this.com = httpCom;
+            }
+        });
     }
 
     public start(name: string) {
