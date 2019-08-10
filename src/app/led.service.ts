@@ -77,7 +77,7 @@ export class LEDService {
     }
 
     public getSerialports(): Promise<SerialPort[]> {
-        return this.com.read(this.BASE + 'serialport/write').then((result: any) => result.serialports);
+        return this.com.read(this.BASE + 'serialport/get').then((result: any) => result.serialports);
     }
 
     public setSerialport(port: string) {
