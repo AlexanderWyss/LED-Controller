@@ -15,4 +15,4 @@ ionic cordova build android --prod
 adb install .\platforms\android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
-Dependig on wheter it is used as Website or App Http or Bluetooth will be used.
+Dependig on wheter it is used as Website or App, Http or Bluetooth will be used.
