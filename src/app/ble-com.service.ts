@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {BLE} from "@ionic-native/ble/ngx";
 import * as uuidGen from "uuid/v5";
 import {ComService} from "./com.service";
+import {ToastService} from "./toast.service";
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +11,7 @@ export class BleComService extends ComService {
   protected uuid = "de7daa74-9126-494c-b277-9ca4c0944c7e";
   private id: string;
 
-  constructor(private ble: BLE) {
+  constructor(private ble: BLE, private toast: ToastService) {
     super("ble");
   }
 
@@ -46,9 +47,11 @@ export class BleComService extends ComService {
       this.ble.autoConnect(result.id, (status) => {
         this.id = result.id;
         console.log("BLE Connected: " + result.id);
+        this.toast.good("Bluetooth connected");
       }, () => {
         this.id = null;
         console.log("BLE Disconnected: " + result.id);
+        this.toast.error("Bluetooth disconnected");
       });
     });
   }

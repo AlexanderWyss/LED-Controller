@@ -3,12 +3,8 @@ import {ComProviderService} from "./com-provider.service";
 import {ComService} from "./com.service";
 import {Pattern} from "./pattern.service";
 
-export interface SerialPort {
-  comName: string;
-}
-
 export interface PortInfo {
-  serialports: SerialPort[];
+  serialports: string[];
   selectedPort: string;
 }
 

@@ -1,6 +1,8 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
+import {IonRefresher, ToastController} from "@ionic/angular";
 import {ComProviderService} from "../com-provider.service";
 import {LEDService, PortInfo} from "../led.service";
+import {ToastService} from "../toast.service";
 
 @Component({
   selector: "app-settings",
@@ -9,9 +11,11 @@ import {LEDService, PortInfo} from "../led.service";
 })
 export class SettingsPage implements OnInit {
 
+  @ViewChild(IonRefresher) refresher: IonRefresher;
+
   private httpPrefix = "http://";
 
-  portsInfo: PortInfo;
+  portsInfo: PortInfo = {serialports: [], selectedPort: ""};
   numberOfLeds: number;
   pin: string;
   pins = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"];
@@ -19,11 +23,23 @@ export class SettingsPage implements OnInit {
   url: string;
   selectCom: boolean;
 
-  constructor(private ledService: LEDService, private comProvider: ComProviderService) {
+  constructor(private ledService: LEDService, private comProvider: ComProviderService, private toast: ToastService) {
   }
 
   ngOnInit() {
-    this.initPort();
+    this.loadAll(this.refresher);
+  }
+
+  loadAll(refresher: any) {
+    this.ledService.getSerialports().then(portsInfo => {
+      this.portsInfo = portsInfo;
+      console.log(portsInfo);
+      refresher.complete();
+    }).catch(error => {
+      refresher.complete();
+      console.error(error);
+      this.toast.error("Loading Serialports failed");
+    });
     this.numberOfLeds = this.ledService.getNumberOfLeds();
     this.pin = this.ledService.getPin();
     this.comProvider.deviceSupportsBluetooth().then(supportsBle => {
@@ -46,10 +62,6 @@ export class SettingsPage implements OnInit {
 
   setPin() {
     this.ledService.setPin(this.pin);
-  }
-
-  private initPort() {
-    this.ledService.getSerialports().then(portsInfo => this.portsInfo = portsInfo).catch(error => console.log(error));
   }
 
   setCom() {

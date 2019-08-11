@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="loadAll($event.target)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-list>
         <ion-item *ngIf="selectCom">
             <ion-label>Com</ion-label>
@@ -26,7 +29,7 @@
             <ion-select (ionChange)="setPort()" [(ngModel)]="portsInfo.selectedPort">
                 <ion-select-option value="autoselect">Autoselect</ion-select-option>
                 <ion-select-option *ngFor="let port of portsInfo.serialports"
-                                   [value]="port.comName">{{port.comName}}</ion-select-option>
+                                   [value]="port">{{port}}</ion-select-option>
             </ion-select>
         </ion-item>
         <ion-item>
