@@ -11,7 +11,7 @@
     <ion-list>
         <ion-item>
             <ion-label>Com Ports</ion-label>
-            <ion-select [(ngModel)]="selectedPort" (ionChange)="setPort()">
+            <ion-select (ionChange)="setPort()" [(ngModel)]="selectedPort">
                 <ion-select-option value="autoselect">Autoselect</ion-select-option>
                 <ion-select-option *ngFor="let port of serialports"
                                    [value]="port.comName">{{port.comName}}</ion-select-option>
@@ -19,11 +19,11 @@
         </ion-item>
         <ion-item>
             <ion-label>Number of LEDs</ion-label>
-            <ion-input slot="end" [(ngModel)]="numberOfLeds" (change)="setNumberOfLeds()" type="number"></ion-input>
+            <ion-input (change)="setNumberOfLeds()" [(ngModel)]="numberOfLeds" slot="end" type="number"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Neopixel Pin</ion-label>
-            <ion-select [(ngModel)]="pin" (ionChange)="setPin()">
+            <ion-select (ionChange)="setPin()" [(ngModel)]="pin">
                 <ion-select-option *ngFor="let pin of pins">{{pin}}</ion-select-option>
             </ion-select>
         </ion-item>

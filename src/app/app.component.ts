@@ -1,23 +1,23 @@
-import { Component } from '@angular/core';
+import {Component} from "@angular/core";
+import {SplashScreen} from "@ionic-native/splash-screen/ngx";
+import {StatusBar} from "@ionic-native/status-bar/ngx";
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {Platform} from "@ionic/angular";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html'
+  selector: "app-root",
+  templateUrl: "app.component.html"
 })
 export class AppComponent {
   public appPages = [
     {
-      title: 'Patterns',
-      url: '/patterns',
-      icon: 'color-palette'
+      title: "Patterns",
+      url: "/patterns",
+      icon: "color-palette"
     }, {
-      title: 'Settings',
-      url: '/settings',
-      icon: 'color-palette'
+      title: "Settings",
+      url: "/settings",
+      icon: "color-palette"
     }
   ];
 

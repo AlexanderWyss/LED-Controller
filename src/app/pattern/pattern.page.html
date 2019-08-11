@@ -1,30 +1,32 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="patterns"></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{pattern.text}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="patterns"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{pattern.text}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <div *ngFor="let patternSetting of pattern.patternSettings">
-      <app-pattern-settings-slider *ngIf="patternSetting.type =='slider'" [patternSetting]="patternSetting"></app-pattern-settings-slider>
-      <app-pattern-settings-color *ngIf="patternSetting.type =='color'" [patternSetting]="patternSetting"></app-pattern-settings-color>
-    </div>
-  </ion-list>
-  <ion-fab vertical="end" horizontal="start" class="horizontal-ion-fab-list">
-    <ion-fab-button (click)="stop()" color="danger">
-      <ion-icon icon="square"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-button (click)="start()" color="success">
-      <ion-icon icon="play"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <ion-fab vertical="end" horizontal="end">
-    <ion-fab-button (click)="save()">
-      <ion-icon icon="sync"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-list>
+        <div *ngFor="let patternSetting of pattern.patternSettings">
+            <app-pattern-settings-slider *ngIf="patternSetting.type =='slider'"
+                                         [patternSetting]="patternSetting"></app-pattern-settings-slider>
+            <app-pattern-settings-color *ngIf="patternSetting.type =='color'"
+                                        [patternSetting]="patternSetting"></app-pattern-settings-color>
+        </div>
+    </ion-list>
+    <ion-fab class="horizontal-ion-fab-list" horizontal="start" vertical="end">
+        <ion-fab-button (click)="stop()" color="danger">
+            <ion-icon icon="square"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="start()" color="success">
+            <ion-icon icon="play"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+    <ion-fab horizontal="end" vertical="end">
+        <ion-fab-button (click)="save()">
+            <ion-icon icon="sync"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

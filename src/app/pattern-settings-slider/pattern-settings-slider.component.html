@@ -1,5 +1,6 @@
 <ion-item>
     <ion-label>{{patternSetting.title}}</ion-label>
-    <ion-range min="0" max="1000" [(ngModel)]="patternSetting.value"></ion-range>
-    <ion-input type="number" min="0" max="1000" [(ngModel)]="patternSetting.value" (change)="checkValue($event)"></ion-input>
+    <ion-range [(ngModel)]="patternSetting.value" max="1000" min="0"></ion-range>
+    <ion-input (change)="checkValue($event)" [(ngModel)]="patternSetting.value" max="1000" min="0"
+               type="number"></ion-input>
 </ion-item>

@@ -10,19 +10,21 @@
 <ion-content>
     <ion-list>
         <ion-item *ngFor="let pattern of patterns">
-            <ion-button fill="clear" class="toggle" (click)="toggle(pattern)">
+            <ion-button (click)="toggle(pattern)" class="toggle" fill="clear">
                 <ion-label>{{pattern.text}}</ion-label>
             </ion-button>
-            <ion-button fill="clear" class="settings" (click)="options(pattern)">
-                <ion-icon icon="settings" slot="end" color="primary"></ion-icon>
+            <ion-button (click)="options(pattern)" class="settings" fill="clear">
+                <ion-icon color="primary" icon="settings" slot="end"></ion-icon>
             </ion-button>
         </ion-item>
         <ion-item>
-            <ion-button class="stop" fill="clear" (click)="stop()">
-                Stop <ion-icon icon="square"></ion-icon>
+            <ion-button (click)="stop()" class="stop" fill="clear">
+                Stop
+                <ion-icon icon="square"></ion-icon>
             </ion-button>
-            <ion-button class="alloff" fill="clear" (click)="allOff()">
-                All Off <ion-icon icon="bulb"></ion-icon>
+            <ion-button (click)="allOff()" class="alloff" fill="clear">
+                All Off
+                <ion-icon icon="bulb"></ion-icon>
             </ion-button>
         </ion-item>
     </ion-list>

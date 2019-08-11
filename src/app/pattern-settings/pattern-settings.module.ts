@@ -1,21 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {PatternSettingsSliderComponent} from '../pattern-settings-slider/pattern-settings-slider.component';
-import {IonicModule} from '@ionic/angular';
-import {FormsModule} from '@angular/forms';
-import {PatternSettingsColorComponent} from '../pattern-settings-color/pattern-settings-color.component';
-import {ColorPickerModule} from '@iplab/ngx-color-picker';
+import {CommonModule} from "@angular/common";
+import {NgModule} from "@angular/core";
+import {FormsModule} from "@angular/forms";
+import {IonicModule} from "@ionic/angular";
+import {ColorPickerModule} from "@iplab/ngx-color-picker";
+import {PatternSettingsColorComponent} from "../pattern-settings-color/pattern-settings-color.component";
+import {PatternSettingsSliderComponent} from "../pattern-settings-slider/pattern-settings-slider.component";
 
 @NgModule({
   declarations: [PatternSettingsSliderComponent, PatternSettingsColorComponent],
   exports: [
-      PatternSettingsSliderComponent, PatternSettingsColorComponent
+    PatternSettingsSliderComponent, PatternSettingsColorComponent
   ],
-    imports: [
-        CommonModule,
-        IonicModule,
-        FormsModule,
-        ColorPickerModule
-    ]
+  imports: [
+    CommonModule,
+    IonicModule,
+    FormsModule,
+    ColorPickerModule
+  ]
 })
-export class PatternSettingsModule { }
+export class PatternSettingsModule {
+}

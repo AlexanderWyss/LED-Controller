@@ -1,5 +1,5 @@
 <ion-item>
     <ion-label>{{patternSetting.title}}</ion-label>
-        <chrome-picker class="desktop" [(color)]="patternSetting.value" [control]="control"></chrome-picker>
-        <swatches-picker class="mobile" [(color)]="patternSetting.value"></swatches-picker>
+    <chrome-picker [(color)]="patternSetting.value" [control]="control" class="desktop"></chrome-picker>
+    <swatches-picker [(color)]="patternSetting.value" class="mobile"></swatches-picker>
 </ion-item>
