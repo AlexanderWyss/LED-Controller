@@ -23,9 +23,9 @@
         </ion-item>
         <ion-item>
             <ion-label>Com Ports</ion-label>
-            <ion-select (ionChange)="setPort()" [(ngModel)]="selectedPort">
+            <ion-select (ionChange)="setPort()" [(ngModel)]="portsInfo.selectedPort">
                 <ion-select-option value="autoselect">Autoselect</ion-select-option>
-                <ion-select-option *ngFor="let port of serialports"
+                <ion-select-option *ngFor="let port of portsInfo.serialports"
                                    [value]="port.comName">{{port.comName}}</ion-select-option>
             </ion-select>
         </ion-item>

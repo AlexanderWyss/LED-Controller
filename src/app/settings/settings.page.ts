@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ComProviderService} from "../com-provider.service";
-import {LEDService, SerialPort} from "../led.service";
+import {LEDService, PortInfo} from "../led.service";
 
 @Component({
   selector: "app-settings",
@@ -11,8 +11,7 @@ export class SettingsPage implements OnInit {
 
   private httpPrefix = "http://";
 
-  serialports: SerialPort[];
-  selectedPort;
+  portsInfo: PortInfo;
   numberOfLeds: number;
   pin: string;
   pins = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"];
@@ -38,7 +37,7 @@ export class SettingsPage implements OnInit {
   }
 
   setPort() {
-    this.ledService.setSerialport(this.selectedPort);
+    this.ledService.setSerialport(this.portsInfo.selectedPort);
   }
 
   setNumberOfLeds() {
@@ -50,12 +49,7 @@ export class SettingsPage implements OnInit {
   }
 
   private initPort() {
-    this.ledService.getSerialports().then(serialports => this.serialports = serialports).catch(error => console.log(error));
-    if (this.ledService.getSelectedPort()) {
-      this.selectedPort = this.ledService.getSelectedPort();
-    } else {
-      this.selectedPort = "autoselect";
-    }
+    this.ledService.getSerialports().then(portsInfo => this.portsInfo = portsInfo).catch(error => console.log(error));
   }
 
   setCom() {

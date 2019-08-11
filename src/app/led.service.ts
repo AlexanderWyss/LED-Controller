@@ -1,18 +1,15 @@
 import {Injectable} from "@angular/core";
-import {BleComService} from "./ble-com.service";
 import {ComProviderService} from "./com-provider.service";
 import {ComService} from "./com.service";
-import {HttpComService} from "./http-com.service";
 import {Pattern} from "./pattern.service";
 
 export interface SerialPort {
   comName: string;
-  manufacturer?: string;
-  serialNumber?: string;
-  pnpId?: string;
-  locationId?: string;
-  productId?: string;
-  vendorId?: string;
+}
+
+export interface PortInfo {
+  serialports: SerialPort[];
+  selectedPort: string;
 }
 
 @Injectable({
@@ -21,7 +18,6 @@ export interface SerialPort {
 export class LEDService {
 
   BASE = "/api/";
-  private selectedPort: string;
   private numberOfLeds = 13;
   private pin = "2";
 
@@ -67,17 +63,12 @@ export class LEDService {
     return this.pin;
   }
 
-  public getSerialports(): Promise<SerialPort[]> {
-    return this.getCom().read(this.BASE + "serialport/get").then((result: any) => result.serialports);
+  public getSerialports(): Promise<PortInfo> {
+    return this.getCom().read(this.BASE + "serialport/get").then((result: any) => result);
   }
 
   public setSerialport(port: string) {
-    this.selectedPort = port;
     this.getCom().write(this.BASE + "serialport/set", {name: port});
-  }
-
-  public getSelectedPort() {
-    return this.selectedPort;
   }
 
   private getCom(): ComService {
