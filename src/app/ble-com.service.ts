@@ -57,4 +57,12 @@ export class BleComService extends ComService {
     this.ble.stopScan().then(v => console.log("BLE stop"));
     this.ble.disconnect(this.id).then(v => console.log("BLE Disconnect"));
   }
+
+  close() {
+    this.disconnect();
+  }
+
+  open() {
+    this.autoConnect();
+  }
 }

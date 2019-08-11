@@ -11,4 +11,8 @@ export abstract class ComService {
   public getProtocol(): string {
     return this.protocol;
   }
+
+  public abstract close();
+
+  public abstract open();
 }

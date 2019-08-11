@@ -1,25 +1,38 @@
-import { Injectable } from "@angular/core";
-import {BLE} from "@ionic-native/ble/ngx";
+import {Injectable} from "@angular/core";
 import {Platform} from "@ionic/angular";
 import {BleComService} from "./ble-com.service";
 import {ComService} from "./com.service";
 import {HttpComService} from "./http-com.service";
+import {PreferencesService} from "./preferences.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class ComProviderService {
 
+  private static PREFERENCES_COM_PROVIDER_KEY = "comprov.provider";
+
   private com: ComService;
 
-  constructor(private httpCom: HttpComService, private bleCom: BleComService, private plt: Platform) {
+  constructor(private httpCom: HttpComService, private bleCom: BleComService, private plt: Platform,
+              private preference: PreferencesService) {
     this.setInitialCom();
   }
 
   private setInitialCom(): void {
     this.deviceSupportsBluetooth().then(supportsBluetooth => {
       if (supportsBluetooth) {
-        this.setBle();
+        this.preference.get(ComProviderService.PREFERENCES_COM_PROVIDER_KEY, this.bleCom.getProtocol())
+          .then(provider => {
+            switch (provider) {
+              case this.bleCom.getProtocol():
+                this.setBle();
+                break;
+              case this.httpCom.getProtocol():
+                this.setHttp();
+                break;
+            }
+          });
       } else {
         this.setHttp();
       }
@@ -32,15 +45,21 @@ export class ComProviderService {
 
 
   public setHttp() {
-    console.log("HTTP");
-    this.com = this.httpCom;
-    this.bleCom.disconnect();
+    this.setCom(this.httpCom);
   }
 
   public setBle() {
-    console.log("BLE");
-    this.com = this.bleCom;
-    this.bleCom.autoConnect();
+    this.setCom(this.bleCom);
+  }
+
+  private setCom(com: ComService) {
+    if (this.com) {
+      this.com.close();
+    }
+    console.log(com.getProtocol());
+    this.com = com;
+    this.com.open();
+    this.preference.set(ComProviderService.PREFERENCES_COM_PROVIDER_KEY, this.com.getProtocol());
   }
 
   public getCom(): ComService {

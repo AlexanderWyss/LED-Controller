@@ -12,6 +12,7 @@ import {ColorPickerModule} from "@iplab/ngx-color-picker";
 import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
 import {PatternSettingsModule} from "./pattern-settings/pattern-settings.module";
+import { IonicStorageModule } from "@ionic/storage";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import {PatternSettingsModule} from "./pattern-settings/pattern-settings.module"
     FormsModule,
     PatternSettingsModule,
     ColorPickerModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
