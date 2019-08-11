@@ -9,6 +9,18 @@
 
 <ion-content>
     <ion-list>
+        <ion-item *ngIf="selectCom">
+            <ion-label>Com</ion-label>
+            <ion-select (ionChange)="setCom()" [(ngModel)]="com">
+                <ion-select-option value="ble">Bluetooth</ion-select-option>
+                <ion-select-option value="http">Http</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item *ngIf="com === 'http' && selectCom" >
+            <ion-label>Url</ion-label>
+            <ion-text padding-start>{{httpPrefix}}</ion-text>
+            <ion-input (ionChange)="setUrl()" [(ngModel)]="url" type="url" no-margin no-padding ></ion-input>
+        </ion-item>
         <ion-item>
             <ion-label>Com Ports</ion-label>
             <ion-select (ionChange)="setPort()" [(ngModel)]="selectedPort">

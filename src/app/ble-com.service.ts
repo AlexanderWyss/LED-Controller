@@ -11,17 +11,7 @@ export class BleComService extends ComService {
   private id: string;
 
   constructor(private ble: BLE) {
-    super();
-    console.log("Start scan");
-    this.ble.startScan([this.uuid]).subscribe(result => {
-      this.ble.autoConnect(result.id, (status) => {
-        this.id = result.id;
-        console.log("BLE Connected: " + result.id);
-      }, () => {
-        this.id = null;
-        console.log("BLE Disconnected: " + result.id);
-      });
-    });
+    super("ble");
   }
 
   write(name: string, data: object): Promise<object> {
@@ -48,5 +38,23 @@ export class BleComService extends ComService {
 
   private getUuid(name: string) {
     return uuidGen(name, this.uuid);
+  }
+
+  public autoConnect() {
+    console.log("BLE Start scan");
+    this.ble.startScan([this.uuid]).subscribe(result => {
+      this.ble.autoConnect(result.id, (status) => {
+        this.id = result.id;
+        console.log("BLE Connected: " + result.id);
+      }, () => {
+        this.id = null;
+        console.log("BLE Disconnected: " + result.id);
+      });
+    });
+  }
+
+  public disconnect() {
+    this.ble.stopScan().then(v => console.log("BLE stop"));
+    this.ble.disconnect(this.id).then(v => console.log("BLE Disconnect"));
   }
 }
