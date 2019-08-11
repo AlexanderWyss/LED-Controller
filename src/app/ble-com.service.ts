@@ -15,7 +15,7 @@ export class BleComService extends ComService {
     super("ble");
   }
 
-  write(name: string, data: object): Promise<object> {
+  write(name: string, data: object): Promise<any> {
     const json = JSON.stringify(data);
     console.log("BLE: Write: " + name + " " + json);
     return this.ble.write(
@@ -26,8 +26,8 @@ export class BleComService extends ComService {
     );
   }
 
-  read(name: string): Promise<void> {
-    console.log("BLE: Write: " + name);
+  read(name: string): Promise<any> {
+    console.log("BLE: Read: " + name);
     return this.ble.read(
       this.id,
       this.uuid,

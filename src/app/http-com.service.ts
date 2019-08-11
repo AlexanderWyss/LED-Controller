@@ -16,7 +16,7 @@ export class HttpComService extends ComService {
     this.loadUrlFromPreferences();
   }
 
-  write(name: string, data: object): Promise<object> {
+  write(name: string, data: object): Promise<any> {
     console.log("HTTP: Write: " + name + " " + JSON.stringify(data));
     return this.http.get(this.url + name, {params: data as any}).toPromise();
   }

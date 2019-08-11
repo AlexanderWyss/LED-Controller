@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {IonRefresher, ToastController} from "@ionic/angular";
+import {IonRefresher} from "@ionic/angular";
 import {ComProviderService} from "../com-provider.service";
 import {LEDService, PortInfo} from "../led.service";
 import {ToastService} from "../toast.service";
@@ -31,25 +31,23 @@ export class SettingsPage implements OnInit {
   }
 
   loadAll(refresher: any) {
-    this.ledService.getSerialports().then(portsInfo => {
-      this.portsInfo = portsInfo;
-      console.log(portsInfo);
-      refresher.complete();
-    }).catch(error => {
-      refresher.complete();
+    Promise.all([
+      this.ledService.getSerialports().then(portsInfo => {
+        this.portsInfo = portsInfo;
+      }),
+      this.comProvider.deviceSupportsBluetooth().then(supportsBle => {
+        this.selectCom = supportsBle;
+        if (supportsBle) {
+          this.com = this.comProvider.getCom().getProtocol();
+          this.url = this.comProvider.getHttpUrl();
+        }
+      }),
+      this.ledService.getNumberOfLeds().then(numberOfLeds => this.numberOfLeds = numberOfLeds),
+      this.ledService.getPin().then(pin => this.pin = pin)
+    ]).catch((error) => {
       console.error(error);
-      this.toast.error("Loading Serialports failed");
-    });
-    this.numberOfLeds = this.ledService.getNumberOfLeds();
-    this.pin = this.ledService.getPin();
-    this.comProvider.deviceSupportsBluetooth().then(supportsBle => {
-      console.log(supportsBle);
-      this.selectCom = supportsBle;
-      if (supportsBle) {
-        this.com = this.comProvider.getCom().getProtocol();
-        this.url = this.comProvider.getHttpUrl();
-      }
-    });
+      this.toast.error("Something went wrong while refreshing Settings");
+    }).finally(() => refresher.complete());
   }
 
   setPort() {

@@ -4,9 +4,9 @@ export abstract class ComService {
 
   }
 
-  public abstract read(name: string): Promise<void>;
+  public abstract read(name: string): Promise<any>;
 
-  public abstract write(name: string, data: object): Promise<object>;
+  public abstract write(name: string, data: object): Promise<any>;
 
   public getProtocol(): string {
     return this.protocol;

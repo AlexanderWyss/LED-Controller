@@ -14,8 +14,6 @@ export interface PortInfo {
 export class LEDService {
 
   BASE = "/api/";
-  private numberOfLeds = 13;
-  private pin = "2";
 
   constructor(private comProvider: ComProviderService) {
   }
@@ -42,25 +40,23 @@ export class LEDService {
   }
 
   public setNumberOfLeds(leds: number) {
-    this.numberOfLeds = leds;
-    this.getCom().write(this.BASE + "options/leds/set", {leds: leds.toString()});
+    this.getCom().write(this.BASE + "leds/set", {leds: leds.toString()});
   }
 
-  public getNumberOfLeds(): number {
-    return this.numberOfLeds;
+  public getNumberOfLeds(): Promise<number> {
+    return this.getCom().read(this.BASE + "leds/get").then(result => result.leds);
   }
 
   public setPin(pin: string) {
-    this.pin = pin;
-    this.getCom().write(this.BASE + "options/pin/set", {pin});
+    this.getCom().write(this.BASE + "pin/set", {pin});
   }
 
-  public getPin(): string {
-    return this.pin;
+  public getPin(): Promise<string> {
+    return this.getCom().read(this.BASE + "pin/get").then(result => result.pin);
   }
 
   public getSerialports(): Promise<PortInfo> {
-    return this.getCom().read(this.BASE + "serialport/get").then((result: any) => result);
+    return this.getCom().read(this.BASE + "serialport/get");
   }
 
   public setSerialport(port: string) {
