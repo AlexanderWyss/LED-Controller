@@ -21,7 +21,13 @@ export class UpdateService {
         return Promise.all([
           this.appVersion.getVersionCode(),
           this.http.get("/files/output.json").then(info => info[0].apkInfo.versionCode)
-        ]).then((results) => results[0] !== results[1])
+        ]).then((results) => {
+          const updateAvailable = results[0] !== results[1];
+          if (updateAvailable) {
+            this.toast.good("Update Available");
+          }
+          return updateAvailable;
+        })
           .catch(e => false);
       });
     }
