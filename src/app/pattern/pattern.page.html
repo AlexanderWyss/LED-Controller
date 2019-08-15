@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher (ionRefresh)="refresh($event.target)" slot="fixed">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-list>
         <div *ngFor="let patternSetting of pattern.patternSettings">
             <app-pattern-settings-slider *ngIf="patternSetting.type =='slider'"
