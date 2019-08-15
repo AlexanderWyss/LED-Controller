@@ -19,7 +19,7 @@ export class AppComponent {
     }, {
       title: "Settings",
       url: "/settings",
-      icon: "color-palette"
+      icon: "settings"
     }
   ];
   updatesAvailable: boolean;
