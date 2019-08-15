@@ -33,7 +33,7 @@ export class HttpComService extends ComService {
   }
 
   getUrl() {
-    return this.url;
+    return "http://" + this.url;
   }
 
   private loadUrlFromPreferences() {

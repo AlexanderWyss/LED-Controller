@@ -79,6 +79,6 @@ export class SettingsPage implements OnInit {
       tempUrl = tempUrl.substr(this.httpPrefix.length);
     }
     this.url = tempUrl;
-    this.comProvider.setHttpUrl(this.httpPrefix + this.url);
+    this.comProvider.setHttpUrl(this.url);
   }
 }
