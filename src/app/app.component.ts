@@ -3,6 +3,7 @@ import {SplashScreen} from "@ionic-native/splash-screen/ngx";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 import {Platform} from "@ionic/angular";
+import {ToastService} from "./toast.service";
 import {UpdateService} from "./update.service";
 
 @Component({
@@ -22,12 +23,14 @@ export class AppComponent {
     }
   ];
   updatesAvailable: boolean;
+  isBrowser: boolean;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private updateService: UpdateService
+    private updateService: UpdateService,
+    private toast: ToastService
   ) {
     this.initializeApp();
   }
@@ -36,6 +39,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.isBrowser = !this.platform.is("cordova");
       this.updateService.iAvailable().then(isAvailable => {
         this.updatesAvailable = isAvailable;
       });
@@ -43,6 +47,6 @@ export class AppComponent {
   }
 
   update() {
-    this.updateService.download();
+    this.updateService.download().catch(e => this.toast.error("Something went wrong while downloading the apk."));
   }
 }

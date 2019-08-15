@@ -6,6 +6,7 @@
                     <ion-title>Menu</ion-title>
                     <ion-buttons slot="end">
                         <ion-button (click)="update()" *ngIf="updatesAvailable">Update</ion-button>
+                        <ion-button (click)="update()" *ngIf="isBrowser">Download App</ion-button>
                     </ion-buttons>
                 </ion-toolbar>
             </ion-header>
