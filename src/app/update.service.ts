@@ -38,4 +38,8 @@ export class UpdateService {
         });
     });
   }
+
+  getRelativeUrl(): string {
+    return "/files/app-debug.apk";
+  }
 }

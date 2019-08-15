@@ -24,6 +24,7 @@ export class AppComponent {
   ];
   updatesAvailable: boolean;
   isBrowser: boolean;
+  appUrl: string;
 
   constructor(
     private platform: Platform,
@@ -40,6 +41,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.isBrowser = !this.platform.is("cordova");
+      this.appUrl = this.updateService.getRelativeUrl();
       this.updateService.iAvailable().then(isAvailable => {
         this.updatesAvailable = isAvailable;
       });
