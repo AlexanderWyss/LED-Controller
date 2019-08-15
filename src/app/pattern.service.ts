@@ -21,6 +21,16 @@ export interface PatternSetting {
 export class PatternService {
   public patterns: Pattern[] = [
     {
+      name: "neo",
+      text: "Strip",
+      patternSettings: [{
+        title: "Color",
+        name: "color",
+        value: "#ffffff",
+        type: "color"
+      }]
+    },
+    {
       name: "wave",
       text: "Wave",
       patternSettings: [{
