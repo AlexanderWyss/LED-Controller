@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import {LEDService} from "./led.service";
 
 export interface Pattern {
   name: string;
@@ -11,6 +12,7 @@ export interface PatternSetting {
   name: string;
   value: any;
   type: string;
+  maxValue?: number;
 }
 
 @Injectable({
@@ -123,4 +125,26 @@ export class PatternService {
       }]
     }
   ];
+
+  constructor(private ledService: LEDService) {
+  }
+
+  public refresh(): Promise<void> {
+    return this.ledService.getNumberOfLeds().then(numberOfLeds => {
+      this.setMaxValue("wave", "size", numberOfLeds);
+      this.setMaxValue("rider", "length", numberOfLeds);
+    });
+  }
+
+  private getPatternSetting(patternName: string, settingName: string) {
+    return this.patterns.find(pattern => pattern.name === patternName).patternSettings.find(settings => settings.name === settingName);
+  }
+
+  private setMaxValue(patternName: string, settingName: string, maxValue: number) {
+    const patternSetting = this.getPatternSetting(patternName, settingName);
+    patternSetting.maxValue = maxValue;
+    if (patternSetting.value > maxValue) {
+      patternSetting.value = maxValue;
+    }
+  }
 }
