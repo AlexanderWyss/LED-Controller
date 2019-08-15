@@ -28,10 +28,6 @@ export class PatternPage implements OnInit {
     this.refresh(this.refresher);
   }
 
-  save() {
-    this.ledService.save(this.pattern);
-  }
-
   start() {
     this.ledService.save(this.pattern);
     this.ledService.start(this.pattern.name);

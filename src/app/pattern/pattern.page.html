@@ -19,17 +19,12 @@
                                         [patternSetting]="patternSetting"></app-pattern-settings-color>
         </div>
     </ion-list>
-    <ion-fab class="horizontal-ion-fab-list" horizontal="start" vertical="end">
+    <ion-fab class="horizontal-ion-fab-list" horizontal="end" vertical="end">
         <ion-fab-button (click)="stop()" color="danger">
             <ion-icon icon="square"></ion-icon>
         </ion-fab-button>
         <ion-fab-button (click)="start()" color="success">
             <ion-icon icon="play"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
-    <ion-fab horizontal="end" vertical="end">
-        <ion-fab-button (click)="save()">
-            <ion-icon icon="sync"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 </ion-content>
