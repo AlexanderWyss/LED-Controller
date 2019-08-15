@@ -71,6 +71,6 @@ export class ComProviderService {
   }
 
   public getHttpUrl(): string {
-    return this.httpCom.getUrl();
+    return this.httpCom.getUrlWithoutProtocol();
   }
 }

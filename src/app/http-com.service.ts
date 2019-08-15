@@ -36,6 +36,10 @@ export class HttpComService extends ComService {
     return "http://" + this.url;
   }
 
+  getUrlWithoutProtocol() {
+    return this.url;
+  }
+
   private loadUrlFromPreferences() {
     this.preferences.get(HttpComService.PREFERENCES_URL_KEY, "").then(url => this.url = url);
   }
