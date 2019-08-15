@@ -3,6 +3,7 @@ import {SplashScreen} from "@ionic-native/splash-screen/ngx";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 import {Platform} from "@ionic/angular";
+import {UpdateService} from "./update.service";
 
 @Component({
   selector: "app-root",
@@ -20,11 +21,13 @@ export class AppComponent {
       icon: "color-palette"
     }
   ];
+  updatesAvailable: boolean;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private updateService: UpdateService
   ) {
     this.initializeApp();
   }
@@ -33,6 +36,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.updateService.iAvailable().then(isAvailable => this.updatesAvailable = isAvailable);
     });
   }
 }
