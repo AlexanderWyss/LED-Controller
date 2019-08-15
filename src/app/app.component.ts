@@ -36,7 +36,13 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.updateService.iAvailable().then(isAvailable => this.updatesAvailable = isAvailable);
+      this.updateService.iAvailable().then(isAvailable => {
+        this.updatesAvailable = isAvailable;
+      });
     });
+  }
+
+  update() {
+    this.updateService.download();
   }
 }

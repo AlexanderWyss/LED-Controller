@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {ComService} from "./com.service";
 import {PreferencesService} from "./preferences.service";
@@ -10,10 +10,11 @@ export class HttpComService extends ComService {
   private static PREFERENCES_URL_KEY = "httpcom.url";
 
   private url = "";
+  private readonly loadPrefs: Promise<any>;
 
   constructor(private http: HttpClient, private preferences: PreferencesService) {
     super("http");
-    this.loadUrlFromPreferences();
+    this.loadPrefs = this.loadUrlFromPreferences();
   }
 
   write(name: string, data: object): Promise<any> {
@@ -23,7 +24,15 @@ export class HttpComService extends ComService {
 
   read(name: string): Promise<any> {
     console.log("HTTP: Read: " + name);
-    return this.http.get(this.url + name).toPromise();
+    return this.http.get(this.getUrl() + name).toPromise();
+  }
+
+  get(uri: string, headers?: HttpHeaders, params?: HttpParams): Promise<any> {
+    return this.http.get(this.getUrl() + uri, {headers, params}).toPromise();
+  }
+
+  getFile(uri: string, headers?: HttpHeaders, params?: HttpParams): Promise<any> {
+    return this.http.get(this.getUrl() + uri, {headers, params, responseType: "blob"}).toPromise();
   }
 
 
@@ -40,8 +49,12 @@ export class HttpComService extends ComService {
     return this.url;
   }
 
+  public ready() {
+    return this.loadPrefs;
+  }
+
   private loadUrlFromPreferences() {
-    this.preferences.get(HttpComService.PREFERENCES_URL_KEY, "").then(url => this.url = url);
+    return this.preferences.get(HttpComService.PREFERENCES_URL_KEY, "").then(url => this.url = url);
   }
 
   close() {
