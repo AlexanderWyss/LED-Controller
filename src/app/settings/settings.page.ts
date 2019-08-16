@@ -95,7 +95,8 @@ export class SettingsPage implements OnInit {
   }
 
   setKeyEmpty() {
-    this.auth.setKey(undefined);
     this.keyPlaceholder = undefined;
+    this.key = undefined;
+    this.auth.setKey(undefined);
   }
 }
