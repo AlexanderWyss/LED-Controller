@@ -24,6 +24,7 @@ export class SettingsPage implements OnInit {
   url: string;
   selectCom: boolean;
   key: string;
+  keyPlaceholder: string;
 
   constructor(private ledService: LEDService, private comProvider: ComProviderService, private toast: ToastService,
               private auth: AuthService) {
@@ -34,7 +35,7 @@ export class SettingsPage implements OnInit {
   }
 
   loadAll(refresher: any) {
-    this.key = this.auth.getKey();
+    this.keyPlaceholder = this.auth.getKey().replace(/./g, "*");
     Promise.all([
       this.ledService.getSerialports().then(portsInfo => {
         this.portsInfo = portsInfo;
