@@ -46,6 +46,9 @@ export class HttpComService extends ComService {
   }
 
   getUrl() {
+    if (this.url === "") {
+      return "";
+    }
     return "http://" + this.url;
   }
 
