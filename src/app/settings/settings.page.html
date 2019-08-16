@@ -28,6 +28,7 @@
             <ion-label>Key</ion-label>
             <ion-input (ionChange)="setKey()" [(ngModel)]="key" [placeholder]="keyPlaceholder"
                        type="password"></ion-input>
+            <ion-button (click)="setKeyEmpty()" *ngIf="keyPlaceholder">Empty</ion-button>
         </ion-item>
         <ion-item>
             <ion-label>Com Ports</ion-label>

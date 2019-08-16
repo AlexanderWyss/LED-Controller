@@ -35,7 +35,12 @@ export class SettingsPage implements OnInit {
   }
 
   loadAll(refresher: any) {
-    this.keyPlaceholder = this.auth.getKey().replace(/./g, "*");
+    const key = this.auth.getKey();
+    if (key) {
+      this.keyPlaceholder = key.replace(/./g, "*");
+    } else {
+      this.keyPlaceholder = undefined;
+    }
     Promise.all([
       this.ledService.getSerialports().then(portsInfo => {
         this.portsInfo = portsInfo;
@@ -87,5 +92,10 @@ export class SettingsPage implements OnInit {
 
   setKey() {
     this.auth.setKey(this.key);
+  }
+
+  setKeyEmpty() {
+    this.auth.setKey(undefined);
+    this.keyPlaceholder = undefined;
   }
 }
