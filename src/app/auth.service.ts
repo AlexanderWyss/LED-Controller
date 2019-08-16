@@ -35,7 +35,7 @@ export class AuthService {
 
   public getToken(): string {
     if (this.hash) {
-      return Otplib.authenticator.generate(this.hash);
+      return Otplib.totp.generate(this.hash);
     }
     return "";
   }
