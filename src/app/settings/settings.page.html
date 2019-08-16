@@ -19,10 +19,14 @@
                 <ion-select-option value="http">Http</ion-select-option>
             </ion-select>
         </ion-item>
-        <ion-item *ngIf="com === 'http' && selectCom" >
+        <ion-item *ngIf="com === 'http' && selectCom">
             <ion-label>Url</ion-label>
             <ion-text padding-start>{{httpPrefix}}</ion-text>
-            <ion-input (ionChange)="setUrl()" [(ngModel)]="url" type="url" no-margin no-padding ></ion-input>
+            <ion-input (ionChange)="setUrl()" [(ngModel)]="url" no-margin no-padding type="url"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="com === 'http'">
+            <ion-label>Key</ion-label>
+            <ion-input (ionChange)="setKey()" [(ngModel)]="key" type="password"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Com Ports</ion-label>

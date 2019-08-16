@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {IonRefresher} from "@ionic/angular";
+import {AuthService} from "../auth.service";
 import {ComProviderService} from "../com-provider.service";
 import {LEDService, PortInfo} from "../led.service";
 import {ToastService} from "../toast.service";
@@ -22,8 +23,10 @@ export class SettingsPage implements OnInit {
   com: string;
   url: string;
   selectCom: boolean;
+  key: string;
 
-  constructor(private ledService: LEDService, private comProvider: ComProviderService, private toast: ToastService) {
+  constructor(private ledService: LEDService, private comProvider: ComProviderService, private toast: ToastService,
+              private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -31,16 +34,15 @@ export class SettingsPage implements OnInit {
   }
 
   loadAll(refresher: any) {
+    this.key = this.auth.getKey();
     Promise.all([
       this.ledService.getSerialports().then(portsInfo => {
         this.portsInfo = portsInfo;
       }),
       this.comProvider.deviceSupportsBluetooth().then(supportsBle => {
         this.selectCom = supportsBle;
-        if (supportsBle) {
-          this.com = this.comProvider.getCom().getProtocol();
-          this.url = this.comProvider.getHttpUrl();
-        }
+        this.com = this.comProvider.getCom().getProtocol();
+        this.url = this.comProvider.getHttpUrl();
       }),
       this.ledService.getNumberOfLeds().then(numberOfLeds => this.numberOfLeds = numberOfLeds),
       this.ledService.getPin().then(pin => this.pin = pin)
@@ -80,5 +82,9 @@ export class SettingsPage implements OnInit {
     }
     this.url = tempUrl;
     this.comProvider.setHttpUrl(this.url);
+  }
+
+  setKey() {
+    this.auth.setKey(this.key);
   }
 }
