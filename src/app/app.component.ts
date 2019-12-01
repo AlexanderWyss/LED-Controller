@@ -20,6 +20,10 @@ export class AppComponent {
       title: "Settings",
       url: "/settings",
       icon: "settings"
+    }, {
+      title: "Schedule",
+      url: "/cron",
+      icon: "timer"
     }
   ];
   updatesAvailable: boolean;

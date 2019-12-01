@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Cron</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item-group *ngFor="let job of cronJobs">
+            <ion-item>
+                <ion-label position="floating">Cron</ion-label>
+                <ion-input type="text" [(ngModel)]="job.cron"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Pattern</ion-label>
+                <ion-select [(ngModel)]="job.pattern">
+                    <ion-select-option *ngFor="let pattern of patterns"
+                                       [value]="pattern.name">{{pattern.text}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+          <ion-button (click)="remove(job)"><ion-icon name="trash"></ion-icon></ion-button>
+        </ion-item-group>
+    </ion-list>
+    <ion-item-group>
+        <ion-item>
+            <ion-label position="floating">Cron</ion-label>
+            <ion-input type="text" [(ngModel)]="cron.cron"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Pattern</ion-label>
+            <ion-select [(ngModel)]="cron.pattern">
+                <ion-select-option *ngFor="let pattern of patterns"
+                                   [value]="pattern.name">{{pattern.text}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+      <ion-button (click)="add()">Add</ion-button>
+    </ion-item-group>
+</ion-content>

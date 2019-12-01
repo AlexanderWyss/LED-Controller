@@ -35,27 +35,31 @@ export class SettingsPage implements OnInit {
   }
 
   loadAll(refresher: any) {
-    const key = this.auth.getKey();
-    if (key) {
-      this.keyPlaceholder = key.replace(/./g, "*");
-    } else {
-      this.keyPlaceholder = undefined;
+    try {
+      const key = this.auth.getKey();
+      if (key) {
+        this.keyPlaceholder = key.replace(/./g, "*");
+      } else {
+        this.keyPlaceholder = undefined;
+      }
+      Promise.all([
+        this.ledService.getSerialports().then(portsInfo => {
+          this.portsInfo = portsInfo;
+        }),
+        this.comProvider.deviceSupportsBluetooth().then(supportsBle => {
+          this.selectCom = supportsBle;
+          this.com = this.comProvider.getCom().getProtocol();
+          this.url = this.comProvider.getHttpUrl();
+        }),
+        this.ledService.getNumberOfLeds().then(numberOfLeds => this.numberOfLeds = numberOfLeds),
+        this.ledService.getPin().then(pin => this.pin = pin)
+      ]).catch((error) => {
+        console.error(error);
+        this.toast.error("Something went wrong while refreshing Settings");
+      }).finally(() => refresher.complete());
+    } catch(e) {
+      console.log(e);
     }
-    Promise.all([
-      this.ledService.getSerialports().then(portsInfo => {
-        this.portsInfo = portsInfo;
-      }),
-      this.comProvider.deviceSupportsBluetooth().then(supportsBle => {
-        this.selectCom = supportsBle;
-        this.com = this.comProvider.getCom().getProtocol();
-        this.url = this.comProvider.getHttpUrl();
-      }),
-      this.ledService.getNumberOfLeds().then(numberOfLeds => this.numberOfLeds = numberOfLeds),
-      this.ledService.getPin().then(pin => this.pin = pin)
-    ]).catch((error) => {
-      console.error(error);
-      this.toast.error("Something went wrong while refreshing Settings");
-    }).finally(() => refresher.complete());
   }
 
   setPort() {
